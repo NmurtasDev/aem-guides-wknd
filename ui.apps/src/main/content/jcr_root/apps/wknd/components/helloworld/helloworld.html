@@ -42,13 +42,13 @@ Usando quanto visto nella scorsa lezione fare in modo che :
 -->
 
 <ul data-sly-list="${valore}">
-    <li style="color: purple">
+    <li data-sly-test="${!itemList.last && !itemList.first}" style="color: purple">
         ${item}
     </li>
-    <li style="color: red">
+    <li data-sly-test="${itemList.last}" style="color: red">
         ${item}
     </li>
-    <li style="color: blue">
+    <li data-sly-test="${itemList.first}" style="color: blue">
         ${item}
     </li>
 </ul>
@@ -59,9 +59,13 @@ Usando quanto visto nella giornata precedente stampare il contenuto del li nel f
 BONUS
 se nella lista è presente un elemento con indice 1 aggiungere alla fine "is the first"
 -->
+<sly data-sly-set.uno="${1}"/>
 <ul data-sly-list.element="${hello.values}">
     <li>
-        ${element}
+        ${elementList.count}) ${element}
+        <sly data-sly-test="${elementList.index == uno}">
+            is the first
+        </sly>
     </li>
 </ul>
 
