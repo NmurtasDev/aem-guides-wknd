@@ -26,7 +26,7 @@ ${hello.message}
     </li>
 </ul>
 
-<ul data-sly-test="${hello.check}" data-sly-list.pippo="${hello.values}">
+<ul data-sly-list.pippo="${hello.values}">
     <li>
         ${pippo} || ${pippoList.count}
     </li>
@@ -34,6 +34,37 @@ ${hello.message}
 <p data-sly-repeat="${hello.values}">
     ${item}
 </p>
+
+<!--
+Usando quanto visto nella scorsa lezione fare in modo che :
+    solo il primo elemento venva stampato con il testo blu
+    solo l'ultimo elemento con il testo rosso
+-->
+
+<ul data-sly-list="${valore}">
+    <li style="color: purple">
+        ${item}
+    </li>
+    <li style="color: red">
+        ${item}
+    </li>
+    <li style="color: blue">
+        ${item}
+    </li>
+</ul>
+<!--
+Usando quanto visto nella giornata precedente stampare il contenuto del li nel formato
+    [numero lemento] ) [valore]
+
+BONUS
+se nella lista è presente un elemento con indice 1 aggiungere alla fine "is the first"
+-->
+<ul data-sly-list.element="${hello.values}">
+    <li>
+        ${element}
+    </li>
+</ul>
+
 
 
 <h1>
