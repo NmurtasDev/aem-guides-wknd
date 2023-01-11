@@ -30,6 +30,8 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Model(adaptables = Resource.class)
@@ -46,6 +48,10 @@ public class HelloWorldModel {
 
     private String message;
 
+    private boolean check;
+
+    private List<String> values;
+
     @PostConstruct
     protected void init() {
         PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
@@ -56,10 +62,22 @@ public class HelloWorldModel {
         message = "Hello World!\n"
             + "Resource type is: " + resourceType + "\n"
             + "Current page is:  " + currentPagePath + "\n";
+        values = new ArrayList<>();
+        values.add("uno");
+        values.add("due");
+        values.add("tre");
+        check = true;
     }
 
     public String getMessage() {
         return message;
     }
 
+    public boolean isCheck() {
+        return check;
+    }
+
+    public List<String> getValues() {
+        return values;
+    }
 }

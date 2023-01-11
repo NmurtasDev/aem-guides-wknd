@@ -19,3 +19,23 @@
 HelloWorldModel says:
 ${hello.message}
 </pre>
+<sly data-sly-set.valore="${hello.values}"/>
+<ul data-sly-test="${hello.check}" data-sly-list="${valore}">
+    <li>
+        ${item} || ${itemList.index} || ${itemList.first}|| ${itemList.last}
+    </li>
+</ul>
+
+<ul data-sly-test="${hello.check}" data-sly-list.pippo="${hello.values}">
+    <li>
+        ${pippo} || ${pippoList.count}
+    </li>
+</ul>
+<p data-sly-repeat="${hello.values}">
+    ${item}
+</p>
+
+
+<h1>
+    modificato con successo!
+</h1>
