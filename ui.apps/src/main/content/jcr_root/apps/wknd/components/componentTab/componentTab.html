@@ -1,0 +1,43 @@
+<!--/*
+    Copyright 2015 Adobe Systems Incorporated
+  
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+  
+        http://www.apache.org/licenses/LICENSE-2.0
+  
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/-->
+<!--MULTIFIELD COMPOSITE-->
+<!-- ciclo i figli della dialog -->
+<div data-sly-list.stateMultifield="${resource.getChildren}">
+    <!--  cerco il nodo che si chiama come il multifiled che mi interessa-->
+    <div data-sly-test="${stateMultifield.name == 'states'}">
+        <!--una volta trovato stampo i valori che mi interessano-->
+        <p>States</p>
+        <ul data-sly-list.state="${stateMultifield.getChildren}">
+
+            <li data-sly-test.name="${state.jcr:name}">State: ${name} </li>
+
+            <li data-sly-test.flag="${state.flag}">
+                Flag:
+                <img src="${flag}" alt="${name}"/>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<ul data-sly-list="${properties.cities}">
+    <li>${item}</li>
+</ul>
+
+
+<h1>
+    Hello World!
+</h1>
