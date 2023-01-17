@@ -1,0 +1,5 @@
+{
+  "scheduler.expression":"*/30 1 * * * ?",
+  "scheduler.concurrent":true,
+  "myParameter":"myparameter2"
+}
