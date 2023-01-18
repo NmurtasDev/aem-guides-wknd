@@ -26,28 +26,23 @@ public class SlingPostProcessorExample implements SlingPostProcessor {
     @Override
     public void process(SlingHttpServletRequest request, List<Modification> mods) throws Exception {
 
+        /**
+         * This map will be used to get session via getServiceResourceResolver() method
+         */
+        Map<String, Object> params = new HashMap<>();
 
-        try (ResourceResolver resourceResolver = request.getResourceResolver()) {
-
-            /**
-             * This map will be used to get session via getServiceResourceResolver() method
-             */
-            Map<String, Object> params = new HashMap<>();
-
-            /**
-             * Adding the subservice name in the param map
-             */
-            params.put(ResourceResolverFactory.SUBSERVICE, "wknd-service-admin");
-
-            /**
-             * Getting resource resolver from the service factory
-             */
-            ResourceResolver resolver = resourceResolverFactory.getServiceResourceResolver(params);
+        /**
+         * Adding the subservice name in the param map
+         */
+        params.put(ResourceResolverFactory.SUBSERVICE, "wknd-service-admin");
 
 
-            Resource resourceBeforeModification1 = resolver.getResource(request.getResource().getPath());
+        /**
+         * Getting resource resolver from the service factory
+         */
+        try (ResourceResolver resolver = resourceResolverFactory.getServiceResourceResolver(params)) {
             //current state of the resource before changes are persisted
-            Resource resourceBeforeModification = resourceResolver.getResource(request.getResource().getPath());
+            Resource resourceBeforeModification1 = resolver.getResource(request.getResource().getPath());
             //our resource will be in the below state after changes are persisted
             Resource resourceAfterModification = request.getResource();
 
