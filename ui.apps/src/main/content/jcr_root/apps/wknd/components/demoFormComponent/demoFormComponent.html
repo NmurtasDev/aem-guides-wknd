@@ -1,0 +1,9 @@
+<form action="${properties.successPath @ extension = 'json' , addSelectors = 'wkndform'}" method="post">
+    <label for="fname">${properties.label1}</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
+    <label for="lname">${properties.label1}</label><br>
+    <input type="text" id="lname" name="lname" value="Doe"><br><br>
+    <input type="hidden" name="succesRedirect" value="${properties.successPath}">
+    <input type="hidden" name="failRedirect" value="${properties.failPath}">
+    <input type="submit" value="Submit">
+</form>
