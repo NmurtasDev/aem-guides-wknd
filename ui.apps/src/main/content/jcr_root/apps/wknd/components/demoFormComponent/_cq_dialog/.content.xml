@@ -38,6 +38,7 @@
                             name="./failPath"
                             required="{Boolean}true"
                             rootPath="/content/wknd"/>
+                    <!--aggiungere date picker-->
                 </items>
             </column>
         </items>
