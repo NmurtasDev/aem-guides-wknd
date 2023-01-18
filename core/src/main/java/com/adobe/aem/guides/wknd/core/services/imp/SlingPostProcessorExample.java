@@ -36,7 +36,6 @@ public class SlingPostProcessorExample implements SlingPostProcessor {
          */
         params.put(ResourceResolverFactory.SUBSERVICE, "wknd-service-admin");
 
-
         /**
          * Getting resource resolver from the service factory
          */

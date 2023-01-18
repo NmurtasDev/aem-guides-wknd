@@ -15,10 +15,7 @@
  */
 package com.adobe.aem.guides.wknd.core.models;
 
-import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
-
-import javax.annotation.PostConstruct;
-
+import com.adobe.aem.guides.wknd.core.utils.DateUtils;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
@@ -28,16 +25,14 @@ import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
-import com.day.cq.wcm.api.Page;
-import com.day.cq.wcm.api.PageManager;
+import javax.annotation.PostConstruct;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
 
 @Model(adaptables = Resource.class)
-public class HelloWorldModel {
+public class DateModel {
 
     @ValueMapValue(name=PROPERTY_RESOURCE_TYPE, injectionStrategy=InjectionStrategy.OPTIONAL)
     @Default(values="No resourceType")
@@ -48,38 +43,33 @@ public class HelloWorldModel {
     @SlingObject
     private ResourceResolver resourceResolver;
 
-    private String message;
+    String minDate;
 
-    private boolean check;
-
-    private List<String> values;
+    String maxDate;
 
     @PostConstruct
     protected void init() {
-        PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
-        String currentPagePath = Optional.ofNullable(pageManager)
-                .map(pm -> pm.getContainingPage(currentResource))
-                .map(Page::getPath).orElse("");
+        ValueMap properties = currentResource.getValueMap();
+        Date date = properties.get("datepicker",Date.class);
+        calculateDate(date);
 
-        message = "Hello World!\n"
-            + "Resource type is: " + resourceType + "\n"
-            + "Current page is:  " + currentPagePath + "\n";
-        values = new ArrayList<>();
-        values.add("uno");
-        values.add("due");
-        values.add("tre");
-        check = true;
     }
 
-    public String getMessage() {
-        return message;
+    private void calculateDate(Date date) {
+        if(date == null){
+            date = new Date();
+        }
+        Date futureDay = DateUtils.getDateOnTheFuture(date,15);
+        SimpleDateFormat simpleDateFormat = DateUtils.getSimpleDateFormatForDatePicker();
+        minDate = simpleDateFormat.format(date);
+        maxDate = simpleDateFormat.format(futureDay);
     }
 
-    public boolean isCheck() {
-        return check;
+    public String getMinDate() {
+        return minDate;
     }
 
-    public List<String> getValues() {
-        return values;
+    public String getMaxDate() {
+        return maxDate;
     }
 }

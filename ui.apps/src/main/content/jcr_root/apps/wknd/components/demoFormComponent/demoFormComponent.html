@@ -1,11 +1,16 @@
+<sly data-sly-use.date="com.adobe.aem.guides.wknd.core.models.DateModel"/>
+
 <form action="${properties.successPath @ extension = 'html' , addSelectors = 'wkndform'}" method="post">
     <label for="fname">${properties.label1}</label><br>
     <input type="text" id="fname" name="fname" value="John"><br>
     <label for="lname">${properties.label1}</label><br>
     <input type="text" id="lname" name="lname" value="Doe"><br><br>
-    <!--creare un model che recuper la data odierna e restituisca la dat 15 giorni nel futuro-->
+    <label for="date">${properties.label1}</label><br>
+    <input type="date" id="date" name="date" min="${date.minDate}" max="${date.maxDate}" />
+    <!-- creare un model che recupere la data e restituisca la dat 15 giorni nel futuro-->
     <!-- creare un date picker che abbia come estremi le 2 date  min la data scelta dall'utente e max la data restituita dal model-->
     <input type="hidden" name="succesRedirect" value="${properties.successPath}">
     <input type="hidden" name="failRedirect" value="${properties.failPath}">
+    <input type="hidden" name="resourcePath" value="${resource.path}">
     <input type="submit" value="Submit">
 </form>
